@@ -25,6 +25,6 @@
 <white>Outstanding Issues:<reset>
 <OrangeRed>-<reset> Still trying to figure out what broke <direction> add.
 
-Report issues on Discord or email rahsael@carrionfields.com
+Report issues on Discord or email imms@carrionfields.com
 
-Have coding chops? Email rahsael@carrionfields.com to contribute to this skin.
+Have coding chops? Email imms@carrionfields.com to contribute to this skin.
