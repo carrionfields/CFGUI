@@ -13,7 +13,7 @@ function downloadPkg()
   if exists("CFGUI", "script") > 0 then
     return
   else
-    downloadFile(getMudletHomeDir() .. "/CFGUI.zip", "https://github.com/Rahsael/CFGUI/releases/latest/download/CFGUI.zip")  
+    downloadFile(getMudletHomeDir() .. "/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")  
   end
   return
 end

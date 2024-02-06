@@ -3543,7 +3543,7 @@ clickAffect(aff_name, 0)</script>
 --  the Mudlet scripting community  --
 --       for code contributions     --
 --                                  --
--- Email: rahsael@carrionfields.com --
+-- Email: imms@carrionfields.com    --
 --          for bug reports         --
 --        or feature requests       --
 --------------------------------------
@@ -4076,13 +4076,13 @@ buildGUI()</script>
 -- Check for updates
 
 downloadFile(
-  getMudletHomeDir() .. "/version.txt", "https://github.com/Rahsael/CFGUI/raw/master/version.txt"
+  getMudletHomeDir() .. "/version.txt", "https://github.com/carrionfields/CFGUI/raw/master/version.txt"
 )
 downloadFile(
-  getMudletHomeDir() .. "/loader.lua", "https://github.com/Rahsael/CFGUI/raw/master/loader.lua"
+  getMudletHomeDir() .. "/loader.lua", "https://github.com/carrionfields/CFGUI/raw/master/loader.lua"
 )
 downloadFile(
-  getMudletHomeDir() .. "/guihelp.lua", "https://github.com/Rahsael/CFGUI/raw/master/guihelp.lua"
+  getMudletHomeDir() .. "/guihelp.lua", "https://github.com/carrionfields/CFGUI/raw/master/guihelp.lua"
 )
 -- Lengthen Buffer
 setConsoleBufferSize("main", 50000, 1000)
@@ -5946,7 +5946,7 @@ XML_version = "2/8/2022"
 -- Initialize downloads version.txt from Github. If the download is successful, versionCheck runs.
 
 function versionCheck(a, filename)
-  --  url: https://github.com/Rahsael/CFGUI/raw/master/version.txt
+  --  url: https://github.com/carrionfields/CFGUI/raw/master/version.txt
   if not filename:find("version.txt", 1, true) then
     return
   end
@@ -5962,12 +5962,12 @@ function versionCheck(a, filename)
   if gui_versiontxt == GUI_version then
   else
     updateWindow(gui_versiontxt, patchnotes, true)
-    downloadFile(getMudletHomeDir() .. "/CFGUI.zip", "https://github.com/Rahsael/CFGUI/releases/latest/download/CFGUI.zip")
+    downloadFile(getMudletHomeDir() .. "/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
   end
   if xml_versiontxt == XML_version then
     return
   else
-    downloadFile(getMudletHomeDir().."/CFGUI.xml", "https://raw.githubusercontent.com/Rahsael/CFGUI/master/CFGUI.xml")
+    downloadFile(getMudletHomeDir().."/CFGUI.xml", "https://raw.githubusercontent.com/carrionfields/CFGUI/master/CFGUI.xml")
   updateWindow(xml_versiontxt, patchnotes, true)
   end
 end
