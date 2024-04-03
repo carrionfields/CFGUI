@@ -27,7 +27,7 @@ GUI_version = "1.4.3"
 -- The 'Initialize' script downloads version.txt from Github. If the download is successful, versionCheck runs.
 function versionCheck(a, filename)
   --  local filename = getMudletHomeDir().."/version.txt"
-  --  local url = "https://github.com/Rahsael/CFGUI/releases/latest/download/version.txt"
+  --  local url = "https://github.com/carrionfields/CFGUI/releases/latest/download/version.txt"
   if not filename:find("version.txt", 1, true) then
     return
   end
