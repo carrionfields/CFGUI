@@ -4067,7 +4067,7 @@ buildGUI()</script>
 				<script>--Updated 4/3/2024
 -- Check for updates
 
-GUI_version = "1.4.3"
+GUI_version = "1.4.3a"
 
 downloadFile(
   getMudletHomeDir() .. "/version.txt", "https://github.com/carrionfields/CFGUI/raw/master/version.txt"
