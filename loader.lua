@@ -39,10 +39,17 @@ function versionCheck(a, filename)
     return
   else
     uninstallPackage("CFGUI")
-    installPackage([[https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip]])
   end
 end
 registerAnonymousEventHandler("sysDownloadDone", "versionCheck")
+
+-- Install new version after removing
+function updatePkg(a, package)
+  if package == "CFGUI" then
+    installPackage([[https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip]])
+  end
+end
+registerAnonymousEventHandler("sysUninstall", "updatePkg")
 
 -- Installation complete notice
 function installComplete(_, package)
