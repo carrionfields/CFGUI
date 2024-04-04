@@ -38,6 +38,7 @@ function versionCheck(a, filename)
   if gui_versiontxt == GUI_version then
     return
   else
+    uninstallPackage("CFGUI")
     installPackage([[https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip]])
   end
 end
