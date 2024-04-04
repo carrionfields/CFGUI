@@ -38,8 +38,8 @@ function versionCheck(a, filename)
   if gui_versiontxt == GUI_version then
     return
   else
-    --uninstallPackage("CFGUI")
-    --cecho("<OrangeRed>A new version of the Carrion Fields client is available. Please restart Mudlet to install before playing.\n\n")
+    uninstallPackage("CFGUI")
+    cecho("<OrangeRed>A new version of the Carrion Fields client is available. Please restart Mudlet to install before playing.\n\n")
     installPackage([[https://github.com/carrionfields/CFGUI/blob/master/CFGUI.xml]])
   end
 end
