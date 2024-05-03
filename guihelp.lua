@@ -1,4 +1,4 @@
---Updated 2/16/2021
+--Updated 5/3/2024
 function guiHelp(helpselect)
   if helpselect == nil then
     helpselect = "menu"
@@ -9,18 +9,73 @@ function guiHelp(helpselect)
     [[
 <white>Variables<gray>
 
-Syntax: <white>var <steel_blue><variable name> <value> <gray>
-        <white>var<gray> to see and manage existing variables
+Syntax: <white>var<gray> to see and manage existing variables
+	<white>var <steel_blue><variable name> <value>
+	<white>@<variable name> <value> <gray>	
 
-<PaleGoldenrod>Variables <gray>are special words that can be set to stand for another for use in <PaleGoldenrod>aliases <gray>(which are detailed in guihelp 2).  For example, you might set the variable @food to 'chicken', or @target to the name of the person you're trying to kill.  This makes your aliases more flexible and multifunctional.
+<PaleGoldenrod>Variables <gray>are special words that can be set to stand for another for use in <PaleGoldenrod>aliases <gray>(which are detailed in guihelp 3).  
+			
+For example, you might set the variable <steel_blue>@food<gray> to 'chicken', or <steel_blue>@target<gray> to the name of the person you're trying to kill.  This makes your aliases more flexible and multifunctional.
 
-Some of the variables are "default variables," which are recommended and used throughout your interface.  In the bar at the bottom of your screen, you will see six boxes labeled <white>Target, Action, Ally, Aid, Mainhand, <gray>and<white> Offhand.<gray> These are important variables to set, so they're listed in a place where you can always see them.  On the right side of your screen, there is also an alias and variable window, which displays all of your set aliases and variables for your convenience.
+Some of the variables are "default variables," which are recommended and used throughout your interface.  In the bar at the bottom of your screen, you will see six boxes labeled <white>Target, Action, Ally, Aid, Mainhand, <gray>and<white> Offhand.<gray> These are important variables to set, so they're listed in a place where you can always see them.  
+
+On the right side of your screen, there is also an alias and variable window, which displays all of your set aliases and variables for your convenience.
 
 If one of your variables refers to an item, we recommend that you use the in-game <white>KEYWORD<gray> command and copy all of the keywords, encased in single-quotes (example: 'whole chicken') into your variable to avoid accidentally using the wrong item.
 
 ]]
   )
-elseif helpselect == '2' or helpselect == 'highlights' then
+elseif helpselect == '2' or helpselect == 'alias' then
+  cecho(
+    [[
+<white>Aliases<gray>
+  
+<gray>Syntax: <white>alias<gray> to see and manage existing aliases
+	<white>alias <pattern> <full command> <gray>to create or modify an alias
+        <white>alias remove <pattern><gray> to delete a single alias
+        <white>alias clear_yes<gray> to delete all aliases
+        
+	<gray>Special characters: <MediumSeaGreen>#<white> = <gray>Your input, <steel_blue>@<white> = <gray>Variable, <OrangeRed>;<white> = <gray>Split
+        
+<PaleGoldenrod>Aliases<gray> are like shortcuts that allow you to enter a complex command by just typing a few letters.  You can make your own using the <white>alias<gray> command, and you can even throw in <PaleGoldenrod>variables<gray> you create using the <white>var<gray> command.<gray>
+
+Example 1:
+<violet>alias heal co 'heal'
+<white>Input:      <PaleGoldenrod>Output:
+<white>heal     <OrangeRed>-> <PaleGoldenrod>co 'heal'
+<white>heal pal <OrangeRed>-> <PaleGoldenrod>co 'heal' pal<reset>
+--------------------------------------------------------------------
+Example 2:
+<violet>alias bt bash <steel_blue>@<pale_goldenrod>target
+<gray>Set @target or any other variable with the <white>variable<gray> command (i.e. <white>var @target Joe<gray>). If you enter something else after 'bt', your command will replace the @target.
+
+<white>Input:       <PaleGoldenrod>Output:
+<white>bt        <OrangeRed>-> <PaleGoldenrod>bash Joe
+<white>bt giant  <OrangeRed>-> <PaleGoldenrod>bash giant
+--------------------------------------------------------------------
+Example 3:
+<violet>alias aa <steel_blue>@<pale_goldenrod>action <steel_blue>@<pale_goldenrod>target
+<gray>(If we set <steel_blue>@<pale_goldenrod>action<gray> to "trip" using: <white>var @action trip<gray>)
+<white>Input:       <PaleGoldenrod>Output:
+<white>aa        <OrangeRed>-> <PaleGoldenrod>trip Joe
+<white>aa giant  <OrangeRed>-> <PaleGoldenrod>trip giant
+--------------------------------------------------------------------
+Example 4:
+<violet>alias gc get <MediumSeaGreen># <steel_blue>@<pale_goldenrod>container<OrangeRed>;<violet>eat <MediumSeaGreen>#
+<gray>The # character translates into whatever you enter after the pattern. The ; character splits your alias into multiple commands. So, if @container = "knapsack"...
+<white>Input:            <PaleGoldenrod>Output:
+<white>gc bread       <OrangeRed>-> <PaleGoldenrod>get bread knapsack
+                  eat bread
+                  
+<OrangeRed>Need more help?  Ask on ]]
+  )
+  cechoLink(
+    "<DodgerBlue>The Carrion Fields Official Discord channel!\n",
+    [[openURL("https://discord.gg/tK8Q5px"]],
+    "Carrion Fields Official Discord",
+    true
+  )
+elseif helpselect == '3' or helpselect == 'highlights' then
   cecho(
     [[
 <white>Highlights<gray>
@@ -35,52 +90,6 @@ For a full list of colors, use the <white>showcolors<gray> command.
 ]]
   )
   helpLinks()
-elseif helpselect == '3' or helpselect == 'alias' then
-  cecho(
-    [[
-<white>Aliases<gray>
-  
-<gray>Syntax: <white>alias <pattern> <full command> <gray>to create or modify an alias
-        <white>alias<gray> to see and manage existing aliases
-        <white>alias remove <pattern> <gray>to delete a single alias
-        <white>alias clear_yes <gray>to delete all aliases
-        <gray>Special characters: <MediumSeaGreen>#<white> = <gray>Your input, <steel_blue>@<white> = <gray>Variable, <OrangeRed>;<white> = <gray>Split
-        
-<PaleGoldenrod>Aliases<gray> are like shortcuts that allow you to enter a complex command by just typing a few letters.  You can make your own using the <white>alias<gray> command, and you can even throw in <PaleGoldenrod>variables<gray> you create using the <white>var<gray> command.<gray>
-
-Examples:
-<violet>alias heal co 'heal'
-<white>Input:      <PaleGoldenrod>Output:
-<white>heal     <OrangeRed>-> <PaleGoldenrod>co 'heal'
-<white>heal pal <OrangeRed>-> <PaleGoldenrod>co 'heal' pal
-
-<violet>alias bt bash <steel_blue>@<pale_goldenrod>target
-<gray>Set @target or any other variable with the <white>variable<gray> command (i.e. <white>var @target Joe<gray>). If you enter something else after 'bt', your command will replace the @target.
-
-<white>Input:       <PaleGoldenrod>Output:
-<white>bt        <OrangeRed>-> <PaleGoldenrod>bash Joe
-<white>bt giant  <OrangeRed>-> <PaleGoldenrod>bash giant
-
-<violet>alias aa <steel_blue>@<pale_goldenrod>action <steel_blue>@<pale_goldenrod>target
-<gray>(If we set <steel_blue>@<pale_goldenrod>action<gray> to "trip" using: <white>var @action trip<gray>)
-<white>Input:       <PaleGoldenrod>Output:
-<white>aa        <OrangeRed>-> <PaleGoldenrod>trip Joe
-<white>aa giant  <OrangeRed>-> <PaleGoldenrod>trip giant
-
-<violet>alias gc get <MediumSeaGreen># <steel_blue>@<pale_goldenrod>container<OrangeRed>;<violet>eat <MediumSeaGreen>#
-<gray>The # character translates into whatever you enter after the pattern. The ; character splits your alias into multiple commands. So, if @container = "knapsack"...
-<white>Input:            <PaleGoldenrod>Output:
-<white>gc bread       <OrangeRed>-> <PaleGoldenrod>get bread knapsack
-                  eat bread
-                  
-<OrangeRed>Need more help?  Ask on ]]
-  )
-  cechoLink(
-    "<DodgerBlue>The Carrion Fields Official Discord channel!",
-    [[openURL("https://discord.gg/tK8Q5px"]],
-    "Carrion Fields Official Discord",
-    true
-  )
 elseif helpselect == '4' then
   cecho(
     [[
@@ -196,13 +205,13 @@ elseif helpselect == '10' then
     [[
 <white>Mapping<gray>
 
-<gray>The Mudlet generic mapper works with Carrion Fields. We've added a few tweaks with this skin that should help your mapping efforts considerably.
+<gray>The Mudlet generic mapper works with Carrion Fields. We've added a few tweaks with this skin that should help your mapping efforts considerably. However, creating a map with the mapper will still require work on your end.
 
-You can create your own maps of areas that you can save and use across multiple characters. However, we ask that you respect the rules and not share secrets and especially do not share maps of Explore Areas.  Rule violations can result in character denials or even sitebans.
+You can create your own maps of areas that you can save and use across multiple characters. However, we ask that you respect the rules and not share secrets with other players (unless done in-game) and especially do not share maps of Explore Areas.  Rule violations can result in character denials or even permanent bans.
 
 To get started mapping, use the <white>map basics<gray> command.
 
-<gray>Additionally, you can click the <white>World Map<gray> button to see an artistic rendering of the overworld, and the <white>Wiki Maps<gray> button to travel to an external website with text-based maps that are updated often by players.
+<gray>Additionally, you can click the <white>World Map<gray> button to see an artistic rendering of the overworld, and the <white>Wiki Maps<gray> button to travel to an external website with unofficial, text-based maps that are updated often by the player community.
   
 ]]
   )
@@ -257,7 +266,6 @@ For more details, enter the command by itself.
 ]]
   )
   helpLinks()
-  
   elseif helpselect == '0' then
   cecho(
     [[
@@ -272,18 +280,17 @@ For more details, enter the command by itself.
 <reset>Enter <white>guihelp <number><reset> to learn about a feature.
 			
     <dodger_blue>1<reset> - Variables
-    <dodger_blue>2<reset> - Highlights
-    <dodger_blue>3<reset> - Aliases
+    <dodger_blue>2<reset> - Aliases
+    <dodger_blue>3<reset> - Highlights
 
     <dodger_blue>5<reset> - Gauges and the 'Setprompt' Command
     <dodger_blue>4<reset> - The Friends and Enemies System
     <dodger_blue>6<reset> - Item Journal
     <dodger_blue>7<reset> - Target Swapping
     
-    <dodger_blue>8<reset> - Customize Your GUI
-    <dodger_blue>9<reset> - Logging
-    <dodger_blue>10<reset> - Combat Damage Colors
-    <dodger_blue>11<reset> - Mapping
+    <dodger_blue>8<reset> - Logging
+    <dodger_blue>9<reset> - Combat Damage Colors
+    <dodger_blue>10<reset> - Mapping
     
     <dodger_blue>11<reset> - Advanced Aliases & Scripting
     <dodger_blue>12<reset> - Useful Utility Commands - <OrangeRed>A Must-Read!
