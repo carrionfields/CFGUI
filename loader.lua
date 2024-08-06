@@ -57,7 +57,6 @@ function versionCheck(a, filename)
     return
   else
     update_ready = true
-    updateMenu()
     updateWindow()
   end
 end
