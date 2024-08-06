@@ -364,7 +364,6 @@ function installCFGUI()
   downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
   installPackage(getMudletHomeDir().."/CFGUI.zip")
   closeInstallCon()
-  resetProfile()
 end
 
 function noInstall()
