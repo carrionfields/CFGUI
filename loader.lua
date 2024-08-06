@@ -196,8 +196,8 @@ end
 --Create the window for new installs
 function installWindow()
   if exists("CFGUI", "script") > 0 then
-    --    return
-    --  else
+    return
+  else
     installCon =
       installCon or
       Adjustable.Container:new(
@@ -356,13 +356,15 @@ QLabel{
   end
 end
 
-function installCFGUI()
-  installPackage([[https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip]])
-end
-
 function closeInstallCon()
   clearWindow("InstallConsole")
   installCon:hide()
+end
+
+function installCFGUI()
+  installPackage([[https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip]])
+  closeInstallCon()
+  resetProfile()
 end
 
 function noInstall()
