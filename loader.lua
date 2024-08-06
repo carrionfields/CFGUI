@@ -36,7 +36,7 @@ registerAnonymousEventHandler("sysLoadEvent", promptUserInstallPkg)
 
 
 --Create the window for Updates
-function updateWindow()
+function updateBox()
   updateCon =
     updateCon or
     Adjustable.Container:new(
@@ -371,7 +371,7 @@ function versionCheck(a, filename)
     return
   else
     update_ready = true
-    updateWindow()
+    updateBox()
   end
 end
 registerAnonymousEventHandler("sysDownloadDone", versionCheck)
