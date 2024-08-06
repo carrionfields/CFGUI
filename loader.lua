@@ -150,10 +150,9 @@ end
 function updateCFGUI()
   uninstallPackage("CFGUI")
   saveProfile()
-  UpdateConsole:cecho("\n\n<b><yellow>Installing...<reset>")
-  tempTimer(5, [[ resetProfile() ]])
-  tempTimer(6, [[echo("Please wait...")]])
-  tempTimer(10, [[ installCFGUI() ]])
+  UpdateConsole:cecho("\n\n<b><yellow>Uninstalling old version...<reset>")
+  tempTimer(3, [[ resetProfile() ]])
+  tempTimer(5, [[ installCFGUI() ]])
 end
 
 --Create the window for new installs
