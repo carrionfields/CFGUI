@@ -34,44 +34,6 @@ function promptUserInstallPkg()
 end
 registerAnonymousEventHandler("sysLoadEvent", promptUserInstallPkg)
 
--- Checks the version number when version.txt is updated.
-function versionCheck(a, filename)
-  --  local filename = getMudletHomeDir().."/version.txt"
-  --  local url = [[https://github.com/carrionfields/CFGUI/releases/latest/download/version.txt]]
-  if not filename:find("version.txt", 1, true) then
-    return
-  end
-  local f, s, versiontxt = io.open(filename)
-  if f then
-    gui_versiontxt = f:read("*l");
-    obsolete_loader_version = f:read("*l");
-    patchnotes = f:read("*a");
-    io.close(f)
-  end
-  --Check GUI version
-  if GUI_version == nil then
-    installWindow()
-    return
-  end
-  if gui_versiontxt == GUI_version then
-    return
-  else
-    update_ready = true
-    updateWindow()
-  end
-end
-registerAnonymousEventHandler("sysDownloadDone", versionCheck)
-
--- Installation complete notice
-function installComplete(_, package)
-  if package == "CFGUI" then
-    cecho("<OrangeRed><b>Installation complete!<reset>\n\n")
-    cecho(
-      "<grey>After logging in, you may need to use the <white><b>score</b><grey> and <white><b>setprompt</b><grey> command.\nSee <white><b>guihelp</b><grey> for more information.\n\n"
-    )
-  end
-end
-registerAnonymousEventHandler("sysInstall", installComplete)
 
 --Create the window for Updates
 function updateWindow()
@@ -373,3 +335,42 @@ function noInstall()
   disableScript("cfLoader")
   resetProfile()
 end
+
+-- Installation complete notice
+function installComplete(_, package)
+  if package == "CFGUI" then
+    cecho("<OrangeRed><b>Installation complete!<reset>\n\n")
+    cecho(
+      "<grey>After logging in, you may need to use the <white><b>score</b><grey> and <white><b>setprompt</b><grey> command.\nSee <white><b>guihelp</b><grey> for more information.\n\n"
+    )
+  end
+end
+registerAnonymousEventHandler("sysInstall", installComplete)
+
+-- Checks the version number when version.txt is updated.
+function versionCheck(a, filename)
+  --  local filename = getMudletHomeDir().."/version.txt"
+  --  local url = [[https://github.com/carrionfields/CFGUI/releases/latest/download/version.txt]]
+  if not filename:find("version.txt", 1, true) then
+    return
+  end
+  local f, s, versiontxt = io.open(filename)
+  if f then
+    gui_versiontxt = f:read("*l");
+    obsolete_loader_version = f:read("*l");
+    patchnotes = f:read("*a");
+    io.close(f)
+  end
+  --Check GUI version
+  if GUI_version == nil then
+    installWindow()
+    return
+  end
+  if gui_versiontxt == GUI_version then
+    return
+  else
+    update_ready = true
+    updateWindow()
+  end
+end
+registerAnonymousEventHandler("sysDownloadDone", versionCheck)
