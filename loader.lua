@@ -189,7 +189,9 @@ function updateCFGUI()
   uninstallPackage("CFGUI")
   saveProfile()
   UpdateConsole:cecho("\n\n<b><yellow>CLOSING MUDLET... REOPEN TO COMPLETE UPDATE.<reset>")
-  tempTimer(5, [[ closeMudlet() ]])
+  tempTimer(5, [[ resetProfile() ]])
+  tempTimer(6, [[echo("Please wait...")]]
+  tempTimer(10, [[ installCFGUI() ]])
 end
 
 --Create the window for new installs
