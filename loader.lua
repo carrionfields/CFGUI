@@ -32,7 +32,7 @@ function promptUserInstallPkg()
   end
   return
 end
-registerAnonymousEventHandler("sysLoadEvent", "promptUserInstallPkg")
+registerAnonymousEventHandler("sysLoadEvent", promptUserInstallPkg)
 
 -- Checks the version number when version.txt is updated.
 function versionCheck(a, filename)
@@ -60,7 +60,7 @@ function versionCheck(a, filename)
     updateWindow()
   end
 end
-registerAnonymousEventHandler("sysDownloadDone", "versionCheck")
+registerAnonymousEventHandler("sysDownloadDone", versionCheck)
 
 -- Installation complete notice
 function installComplete(_, package)
@@ -71,7 +71,7 @@ function installComplete(_, package)
     )
   end
 end
-registerAnonymousEventHandler("sysInstall", "installComplete")
+registerAnonymousEventHandler("sysInstall", installComplete)
 
 --Create the window for Updates
 function updateWindow()
