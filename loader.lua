@@ -190,7 +190,7 @@ function updateCFGUI()
   saveProfile()
   UpdateConsole:cecho("\n\n<b><yellow>CLOSING MUDLET... REOPEN TO COMPLETE UPDATE.<reset>")
   tempTimer(5, [[ resetProfile() ]])
-  tempTimer(6, [[echo("Please wait...")]]
+  tempTimer(6, [[echo("Please wait...")]])
   tempTimer(10, [[ installCFGUI() ]])
 end
 
