@@ -150,7 +150,7 @@ end
 function updateCFGUI()
   uninstallPackage("CFGUI")
   saveProfile()
-  UpdateConsole:cecho("\n\n<b><yellow>CLOSING MUDLET... REOPEN TO COMPLETE UPDATE.<reset>")
+  UpdateConsole:cecho("\n\n<b><yellow>Installing...<reset>")
   tempTimer(5, [[ resetProfile() ]])
   tempTimer(6, [[echo("Please wait...")]])
   tempTimer(10, [[ installCFGUI() ]])
@@ -343,6 +343,7 @@ function installComplete(_, package)
     cecho(
       "<grey>After logging in, you may need to use the <white><b>score</b><grey> and <white><b>setprompt</b><grey> command.\nSee <white><b>guihelp</b><grey> for more information.\n\n"
     )
+    update_ready = false
   end
 end
 registerAnonymousEventHandler("sysInstall", installComplete)
