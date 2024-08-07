@@ -1,4 +1,4 @@
---Updated 5/3/2024
+--Updated 8/7/2024
 function guiHelp(helpselect)
   if helpselect == nil then
     helpselect = "menu"
@@ -7,13 +7,13 @@ function guiHelp(helpselect)
   if helpselect == '1' or helpselect == 'variables' then
   cecho(
     [[
-<white>Variables<gray>
+<b><white>Variables<gray></b>
 
 Syntax: <white>var<gray> to see and manage existing variables
 	<white>var <steel_blue><variable name> <value>
 	<white>@<variable name> <value> <gray>	
 
-<PaleGoldenrod>Variables <gray>are special words that can be set to stand for another for use in <PaleGoldenrod>aliases <gray>(which are detailed in guihelp 3).  
+<white><b>Variables</b><gray> are special words that can be set to stand for another for use in <white><b>aliases</b><gray> (which are detailed in guihelp 3).
 			
 For example, you might set the variable <steel_blue>@food<gray> to 'chicken', or <steel_blue>@target<gray> to the name of the person you're trying to kill.  This makes your aliases more flexible and multifunctional.
 
@@ -28,7 +28,7 @@ If one of your variables refers to an item, we recommend that you use the in-gam
 elseif helpselect == '2' or helpselect == 'alias' then
   cecho(
     [[
-<white>Aliases<gray>
+<white><b>Aliases</b><gray>
   
 <gray>Syntax: <white>alias<gray> to see and manage existing aliases
 	<white>alias <pattern> <full command> <gray>to create or modify an alias
@@ -93,7 +93,7 @@ For a full list of colors, use the <white>showcolors<gray> command.
 elseif helpselect == '4' then
   cecho(
     [[
-<white>The Friends and Enemies System<gray>
+<white><b>The Friends and Enemies System</b><gray>
 	
 Syntax: <white>info
         <white>friend <name>
@@ -110,7 +110,7 @@ This useful feature might help you remember an enemy's cabal, a warrior's specia
 elseif helpselect == '5' then
   cecho(
     [[
-<white>Gauges and the 'Setprompt' Command<gray>
+<white><b>Gauges and the 'Setprompt' Command</b><gray>
   
 Syntax: <white>setprompt<gray>
 	<white>setprompt <arguments>
@@ -119,13 +119,14 @@ Syntax: <white>setprompt<gray>
 
 <gray>The<white> setprompt <gray>command fixes your prompt to work with the GUI. Typing setprompt by itself will set the default Carrionfields prompt for you. You can also make your own prompt using the format described in the in-game HELP PROMPT.
 
+<OrangeRed><b>*</b><white> NOTE: It is now recommended to use the new, in-game 'mudletmode on' command initially. Setprompt should still be used to modify your prompt.
 ]]
   )
   helpLinks()
 elseif helpselect == '6' then
   cecho(
     [[
-<white>Item Journal<gray>
+<white><b>Item Journal</b><gray>
   
 <gray>Syntax: <white>journal <gray>to see a list of stored items
 <gray>        <white>journal <item number> <gray>to view a stored item identification
@@ -142,7 +143,7 @@ Because some methods of identification are imperfect (i.e. the lore skill), you 
 elseif helpselect == '7' then
   cecho(
     [[
-<white>Target Swapping<gray>
+<white><b>Target Swapping</b><gray>
   
 <gray>Syntax:<white> t1 <steel_blue><name><gray>
 <white>t2 <steel_blue><name><gray> 
@@ -163,7 +164,7 @@ See <white>guihelp 1<gray> for more on The Targeting System.
 elseif helpselect == '8' then
   cecho(
     [[
-<white>Logging<gray>
+<white><b>Logging and The Log Theater</b><gray>
 Syntax:<white> autolog
        <white> log <steel_blue><filename>
        <white> searchlog <filename> <word or phrase>
@@ -176,7 +177,10 @@ The <white>autolog<gray> command toggles automatic logging of each and every ses
 <gray>You can also use the <white>log<gray> command to start a separate log. If you enter a filename that doesn't exist, it will create it as a text file in the log folder, which can be easily accessed by clicking the 'Logs' button at the top right corner of the screen. Use <white>log off<gray> to stop logging. The <white>searchlog<gray> command will find instances of a word or set of words in a log.
 
 <gray>This quick logging function was contributed by a member of the Mudlet community. If you want to create more robust logs, you may use Mudlet's stock logging or replay features, located in the row of buttons to the right of the input prompt.
-	
+
+The Log Theater allows you to replay logs in real time! Use the interface to select a log file, hit play, and enjoy the show. (Long periods of inactivity in the log will be automatically edited.)
+
+Logs must have timestamps in order to be replayable. To enable timestamps, click the "Settings" icon, or Options->Preferences, go to the General tab, and check the box labeled <b><white>"Add timestamps at the beginning of log lines"</b><gray>.
 ]]
   )
   helpLinks(
@@ -189,7 +193,7 @@ The <white>autolog<gray> command toggles automatic logging of each and every ses
 elseif helpselect == '9' then
   cecho(
     [[
-<white>Combat Damage Colors<gray>
+<white><b>Combat Damage Colors</b><gray>
 <gray>Syntax:<white> damcolor <on/off>
              <white> damcolor <incoming/outgoing> <color>
 
@@ -203,7 +207,7 @@ Use the <white>showcolors<gray> command for a list of valid colors.
 elseif helpselect == '10' then
   cecho(
     [[
-<white>Mapping<gray>
+<white><b>Mapping</b><gray>
 
 <gray>The Mudlet generic mapper works with Carrion Fields. We've added a few tweaks with this skin that should help your mapping efforts considerably. However, creating a map with the mapper will still require work on your end.
 
@@ -225,19 +229,38 @@ To get started mapping, use the <white>map basics<gray> command.
 elseif helpselect == '11' then
   cecho(
     [[
-<white>Advanced Aliases & Scripting<gray>
+<white><b>Advanced Aliases & Scripting</b><gray>
   
-<gray>We offer two ways to make aliases in Mudlet: our simple, command-line system, and the Mudlet way, which involves Lua scripting.  If you decide to go the advanced route, knowing some basic programming helps. For the brave, visit wiki.mudlet.org for a helpful guide on creating aliases from scratch in Mudlet.
+<gray>We offer two ways to make aliases in Mudlet: our simple, command-line system, and the Mudlet way, which involves Lua scripting. If you decide to go the advanced route, knowing some basic programming helps. For the brave, visit wiki.mudlet.org for a helpful guide on creating aliases from scratch in Mudlet.
 
-<orange_red>* <gray>To get started making simple ones, it's as easy as typing <white>alias<gray>.  This is what we recommend for the vast majority of players. <orange_red>*<gray>
+<orange_red>*<gray> To get started making simple ones, it's as easy as typing <white>alias<gray>. This is what we recommend for the vast majority of players.<orange_red>*<gray>
 
-<orange_red>*<gray> Do not put your unique aliases in the CFGUI folder, or they will be lost when you update the Carrion Fields skin. <orange_red>*<gray>
+<orange_red>*<gray> Do not put your unique aliases in the CFGUI folder, or they will be lost when you update the Carrion Fields skin.<orange_red>*<gray>
 
 ]]
   )
   helpLinks()
+  elseif helpselect == '12' then
+    cecho(
+	[[
+<white><b>Affects and Affects Monitor</b><gray>
 
-elseif helpselect == '12' then
+When you use the <white><b>affects</b><gray> command, the results will be recorded in the Affects Window and displayed alongside gauges to help you keep track of what is affecting your character. What is displayed in the Affects Window can be very helpful, but it is not always exact! Using the in-game <white><b>affects</b><gray> command will update the affects window and clear up any inconsistencies.
+
+The Affects Monitor, meanwhile, also draws information from the <white><b>affects</b><gray> command. But instead of showing all affects, it watches for specific affects that are important to you. You can choose the affects to display by clicking on the individual affect in the Affects Window, or by using the <white><b>monitor</b><gray> command.
+
+]]
+  elseif helpselect == '13' then
+    cecho(
+	[[				
+<white><b>Fontsize</b><gray>
+
+Most aspects of the interface can be resized. Use the <b><white>fontsize</b><gray> command to make sure text is legible on your screens. Smaller and low-resolution screens might require more adjustment.
+
+Entering the <white><b>fontsize</b><gray> command will display a list of options.
+
+]]		
+elseif helpselect == '14' then
   cecho(
     [[
 <white>Useful Utility Commands<gray>
@@ -250,7 +273,7 @@ For more details, enter the command by itself.
  <steel_blue>* <white>fontsize<gray>       - Sets fontsize of your console window. Type <white>fontsize<gray> alone for details.
  <steel_blue>* <DimGray>guisave<DimGray>        - Save the layout of your windows and tabs (Under Construction)
  <steel_blue>* <DimGray>guireset<DimGray>       - Reset your windows and tabs to default (Under Construction)
- <steel_blue>* <DimGray>guirestore<DimGray>     - Restore your gauges, buttons, channels and Navigator windows (Under Construction)<reset>
+ <steel_blue>* <DimGray>guirestore<DimGray>     - Restore your gauges, buttons, channels and Main Menu windows (Under Construction)<reset>
  
  UTILITY COMMANDS:
  <steel_blue>* <white>autolog<gray>        - Toggle automatic logging of every session
@@ -288,12 +311,15 @@ For more details, enter the command by itself.
     <dodger_blue>6<reset> - Item Journal
     <dodger_blue>7<reset> - Target Swapping
     
-    <dodger_blue>8<reset> - Logging
+    <dodger_blue>8<reset> - Logging and the Log Theater
     <dodger_blue>9<reset> - Combat Damage Colors
     <dodger_blue>10<reset> - Mapping
     
     <dodger_blue>11<reset> - Advanced Aliases & Scripting
-    <dodger_blue>12<reset> - Useful Utility Commands - <OrangeRed>A Must-Read!
+    <dodger_blue>12<reset> - Affects and the Affects Monitor
+    <dodger_blue>13<reset> - Fontsize
+						
+    <dodger_blue>14<reset> - Useful Utility Commands - <OrangeRed>A Must-Read!
     
     <dodger_blue>0<reset> - Troubleshooting
   
