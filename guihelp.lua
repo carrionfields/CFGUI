@@ -249,7 +249,7 @@ When you use the <white><b>affects</b><gray> command, the results will be record
 
 The Affects Monitor, meanwhile, also draws information from the <white><b>affects</b><gray> command. But instead of showing all affects, it watches for specific affects that are important to you. You can choose the affects to display by clicking on the individual affect in the Affects Window, or by using the <white><b>monitor</b><gray> command.
 
-]]
+]])
   elseif helpselect == '13' then
     cecho(
 	[[				
@@ -259,7 +259,7 @@ Most aspects of the interface can be resized. Use the <b><white>fontsize</b><gra
 
 Entering the <white><b>fontsize</b><gray> command will display a list of options.
 
-]]		
+]])
 elseif helpselect == '14' then
   cecho(
     [[
