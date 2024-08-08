@@ -249,6 +249,8 @@ When you use the <white><b>affects</b><gray> command, the results will be record
 
 The Affects Monitor, meanwhile, also draws information from the <white><b>affects</b><gray> command. But instead of showing all affects, it watches for specific affects that are important to you. You can choose the affects to display by clicking on the individual affect in the Affects Window, or by using the <white><b>monitor</b><gray> command.
 
+In addition to affects, you may create labels to better organize your Affects Monitor. For instance, you can create a label titled "Cabal Powers" and move your cabal-related affects beneath it. Or an "Keep Up" label for all abilities that should always be active. To delete a label, simply click it in the Affects Monitor.
+
 ]])
   elseif helpselect == '13' then
     cecho(
