@@ -117,9 +117,11 @@ Syntax: <white>setprompt<gray>
 
 <gray>The gauges on the bottom console show your health, mana, movement and experience to next level based on the percentage of each. They gather those numbers from your prompt, from level-up messages, and from the SCORE command, when you use it.
 
-<gray>The<white> setprompt <gray>command fixes your prompt to work with the GUI. Typing setprompt by itself will set the default Carrionfields prompt for you. You can also make your own prompt using the format described in the in-game HELP PROMPT.
+<gray>The <white>setprompt<gray> command fixes your prompt to work with the GUI. Typing <white><b>setprompt</b><gray> by itself will set the default Carrion Fields prompt for you. 
+			
+You can also use the <white><b>setprompt</b><gray> command to make your own prompt using the format described in the in-game HELP PROMPT. Changing the prompt using the in-game command will
 
-<OrangeRed><b>*</b><white> NOTE: It is now recommended to use the new, in-game 'mudletmode on' command initially. Setprompt should still be used to modify your prompt.
+<OrangeRed><b>*</b><white> NOTE: It is now recommended to use the new, in-game <b>'mudletmode on'</b> command initially. Setprompt should still be used to modify your prompt.
 ]]
   )
   helpLinks()
