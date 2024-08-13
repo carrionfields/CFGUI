@@ -341,7 +341,7 @@ registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
 function CFGUIdownloadError(event, errorFound, localFilename, usedUrl)
   if not localFilename:find("CFGUI.zip", 1, true) then return end
   InstallConsole:cecho(errorFound)
-  debugc("function downloadErrorEventHandler," errorFound)
+  debugc("function downloadErrorEventHandler," .. errorFound)
   InstallConsole:cecho("\n<b><OrangeRed>Error: File download failed. Check your Internet connection.<reset>\n\n")
 end
 registerAnonymousEventHandler("sysDownloadError", CFGUIdownloadError)
