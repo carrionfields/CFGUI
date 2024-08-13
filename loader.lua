@@ -33,20 +33,20 @@ function promptUserInstallPkg()
   if exists("CFGUI", "script") > 0 then
     return
   else
+    downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
     installWindow()
   end
   return
 end
 registerAnonymousEventHandler("sysLoadEvent", promptUserInstallPkg)
 
-
 --Create the window for Updates
 function updateBox()
-  installCon =
-    installCon or
+  updateCon =
+    updateCon or
     Adjustable.Container:new(
       {
-        name = "installCon",
+        name = "updateCon",
         x = "25%",
         y = "0%",
         width = "40%",
@@ -63,22 +63,22 @@ function updateBox()
         locked = false,
       }
     )
-  installCon:show()
+  updateCon:show()
   UpdateVBox =
-    Geyser.VBox:new({name = "UpdateVBox", x = 5, y = 5, width = "98%", height = "98%"}, installCon)
+    Geyser.VBox:new({name = "UpdateVBox", x = 5, y = 5, width = "98%", height = "98%"}, updateCon)
   UpdateHBox = Geyser.HBox:new({name = "UpdateHBox"}, UpdateVBox)
-  InstallConsole =
+  UpdateConsole =
     Geyser.MiniConsole:new(
-      {name = 'InstallConsole', v_stretch_factor = 5, autoWrap = true, scrollBar = false}, UpdateVBox
+      {name = 'UpdateConsole', v_stretch_factor = 5, autoWrap = true, scrollBar = false}, UpdateVBox
     )
-  InstallConsole:setFontSize(12)
-  setBackgroundColor("InstallConsole", 0, 0, 0, 0)
+  UpdateConsole:setFontSize(12)
+  setBackgroundColor("UpdateConsole", 0, 0, 0, 0)
   if getAvailableFonts()["Cascadia Mono"] then
-    setFont("InstallConsole", "Cascadia Mono")
+    setFont("UpdateConsole", "Cascadia Mono")
   end
-  clearWindow("InstallConsole")
-  InstallConsole:cecho(
-    "<white><b>A new version of the Carrion Fields client package is available!<reset>\n\nWe recommend updating for new features and bug fixes. <b>If you choose to update, Mudlet will close.</b> Installation will complete when you reopen Mudlet.\n\nYou can reopen this window anytime from the Main Menu."
+  clearWindow("UpdateConsole")
+  UpdateConsole:cecho(
+    "<white><b>A new version of the Carrion Fields client package is ready to install!<reset>\n\nWe recommend updating for new features and bug fixes. <b>If you choose to update, Mudlet will close.</b> Installation will complete when you reopen Mudlet.\n\nYou can reopen this window anytime from the Main Menu."
   )
   OptionsHBox = Geyser.HBox:new({name = "OptionsHBox", v_stretch_factor = 1}, UpdateVBox)
   OptionsSpacerLabel1 =
@@ -147,9 +147,12 @@ QLabel{
   OptionsSpacerLabel2:setStyleSheet(updateSpacerStyle)
 end
 
+function closeUpdateCon()
+  clearWindow("UpdateConsole")
+  updateCon:hide()
+end
 --Create the window for new installs
 function installWindow()
-  if installing == true then return end
   if exists("CFGUI", "script") > 0 then
     return
   else
@@ -243,7 +246,7 @@ QLabel{
     InstallLabel:setFontSize(14)
     InstallLabel:setFgColor("White")
     InstallLabel:echo("<center>Install Now!")
-    InstallLabel:setClickCallback("downloadCFGUI")
+    InstallLabel:setClickCallback("installCFGUI")
     LaterLabel = Geyser.Label:new({name = "LaterLabel", h_stretch_factor = 1}, InstallOptionsHBox)
     LaterLabel:setStyleSheet(
       [[
@@ -319,25 +322,30 @@ end
 -- Attempt to download latest version of CFGUI, triggeered by click of "Install" or "Update" button
 function downloadCFGUI()
   downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
-  InstallConsole:cecho("\n\n<reset><gray>Downloading latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n")
-end
-
--- Install, triggered by successful download of CFGUI.zip
-function installCFGUI(_, filename)
-  if not filename:find("CFGUI.zip", 1, true) then return end
-  
   if exists("CFGUI", "script") > 0 then
-    InstallConsole:cecho("<gray><b>Download complete!</b>\n\nUninstalling old version...\n")
+    UpdateConsole:cecho("<gray><b>Download complete!</b>\n\nUninstalling old version...\n")
     uninstallPackage("CFGUI")
     saveProfile()
     tempTimer(3, [[ resetProfile() ]])
-    InstallConsole:cecho("<gray>Success.\n\n")
+    UpdateConsole:cecho("<gray>Success.\n\n")
   end
-  InstallConsole:cecho("Installing new version...\n\n")
-  installing = true
+  tempTimer(5, [[ installWindow() ]])
+end
+
+-- Install, triggered by successful download of CFGUI.zip
+function installCFGUI()
+  if io.exists(getMudletHomeDir().."/CFGUI.zip") then
+    InstallConsole:cecho("Preparing to install...\n\n")
+  else
+    InstallConsole:cecho("File not found.\n\n")
+    InstallConsole:cecho("\n\n<reset><gray>Downloading latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n")
+    downloadCFGUI()
+  end
+  --installing = true
+  InstallConsole:cecho("Installing latest version...\n\n")
   tempTimer(5, [[ installPackage(getMudletHomeDir().."/CFGUI.zip") ]])
 end
-registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
+--registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
 
 -- Notifies user if CFGUI.zip fails to download
 function CFGUIdownloadError(event, errorFound, localFilename, usedUrl)
@@ -384,14 +392,17 @@ function versionCheck(a, filename)
   end
   --Check GUI version
   if GUI_version == nil then
+    downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
     installWindow()
     return
   end
-  if gui_versiontxt == GUI_version then
+  if GUI_version == gui_versiontxt then
     return
   else
+    downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
     update_ready = true
     updateBox()
+    return
   end
 end
 registerAnonymousEventHandler("sysDownloadDone", versionCheck)
