@@ -1,4 +1,4 @@
--- Updated 8/6/2024
+-- Updated 8/13/2024
 
 updateContainerStyle =
   [[
@@ -148,9 +148,9 @@ function closeUpdateCon()
 end
 
 function updateCFGUI()
+  UpdateConsole:cecho("\n\n<b><yellow>Uninstalling old version...<reset>\n\nIf the installation does not complete within the next 20 seconds, please restart Mudlet.")
   uninstallPackage("CFGUI")
   saveProfile()
-  UpdateConsole:cecho("\n\n<b><yellow>Uninstalling old version...<reset>")
   tempTimer(3, [[ resetProfile() ]])
   tempTimer(5, [[ installCFGUI() ]])
 end
@@ -340,7 +340,7 @@ function installComplete(_, package)
   if package == "CFGUI" then
     cecho("<OrangeRed><b>Installation complete!<reset>\n\n")
     cecho(
-      "<grey>After logging in, you may need to use the <white><b>score</b><grey> and <white><b>setprompt</b><grey> command.\nSee <white><b>guihelp</b><grey> for more information.\n\n"
+      "<grey><b>IMPORTANT:</b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n"
     )
     update_ready = false
   end
