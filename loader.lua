@@ -107,7 +107,7 @@ QLabel{
   UpdateLabel:setFontSize(14)
   UpdateLabel:setFgColor("White")
   UpdateLabel:echo("<center>Update Now!")
-  UpdateLabel:setClickCallback("updateCFGUI")
+  UpdateLabel:setClickCallback("downloadCFGUI")
   CancelLabel = Geyser.Label:new({name = "CancelLabel", h_stretch_factor = 1}, OptionsHBox)
   CancelLabel:setStyleSheet(
     [[
@@ -145,14 +145,6 @@ end
 function closeUpdateCon()
   clearWindow("UpdateConsole")
   updateCon:hide()
-end
-
-function updateCFGUI()
-  UpdateConsole:cecho("\n\n<b><yellow>Uninstalling old version...<reset>\n\nIf the installation does not complete within the next 20 seconds, please restart Mudlet.")
-  uninstallPackage("CFGUI")
-  saveProfile()
-  tempTimer(3, [[ resetProfile() ]])
-  tempTimer(5, [[ installCFGUI() ]])
 end
 
 --Create the window for new installs
@@ -250,7 +242,7 @@ QLabel{
     InstallLabel:setFontSize(14)
     InstallLabel:setFgColor("White")
     InstallLabel:echo("<center>Install Now!")
-    InstallLabel:setClickCallback("installCFGUI")
+    InstallLabel:setClickCallback("downloadCFGUI")
     LaterLabel = Geyser.Label:new({name = "LaterLabel", h_stretch_factor = 1}, InstallOptionsHBox)
     LaterLabel:setStyleSheet(
       [[
@@ -323,12 +315,38 @@ function closeInstallCon()
   installCon:hide()
 end
 
-function installCFGUI()
+-- Attempt to download latest version of CFGUI, triggeered by click of "Install" or "Update" button
+function downloadCFGUI()
   downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
-  installPackage(getMudletHomeDir().."/CFGUI.zip")
-  closeInstallCon()
+  InstallConsole:cecho("\n\n<reset><gray>Downloading latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n")
 end
 
+-- Install, triggered by successful download of CFGUI.zip
+function installCFGUI(_, filename)
+  if not filename:find("CFGUI.zip", 1, true) then return end
+  
+  if exists("CFGUI", "script") > 0 then
+    InstallConsole:cecho("<gray><b>Download complete!</b>\n\nUninstalling old version...\n")
+    uninstallPackage("CFGUI")
+    saveProfile()
+    tempTimer(3, [[ resetProfile() ]])
+    InstallConsole:cecho("<gray>Success.\n\n")
+  end
+  InstallConsole:cecho("Installing new version...\n\n")
+  tempTimer(5, [[ installPackage(getMudletHomeDir().."/CFGUI.zip") ]])
+end
+registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
+
+-- Notifies user if CFGUI.zip fails to download
+function CFGUIdownloadError(event, errorFound, localFilename, usedUrl)
+  if not localFilename:find("CFGUI.zip", 1, true) then return end
+  InstallConsole:cecho(errorFound)
+  debugc("function downloadErrorEventHandler," errorFound)
+  InstallConsole:cecho("\n<b><OrangeRed>Error: File download failed. Check your Internet connection.<reset>\n\n")
+end
+registerAnonymousEventHandler("sysDownloadError", CFGUIdownloadError)
+
+-- Player declines to install
 function noInstall()
   closeInstallCon()
   disableScript("cfLoader")
@@ -338,6 +356,7 @@ end
 -- Installation complete notice
 function installComplete(_, package)
   if package == "CFGUI" then
+    closeInstallCon()
     cecho("<OrangeRed><b>Installation complete!<reset>\n\n")
     cecho(
       "<grey><b>IMPORTANT:</b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n"
