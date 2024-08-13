@@ -323,8 +323,8 @@ end
 
 -- Attempt to download latest version of CFGUI, triggered by click of "Update" or "Install" button
 function downloadCFGUI()
-  if UpdateConsole then UpdateConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
-  if InstallConsole then InstallConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
+  if UpdateConsole then UpdateConsole:cecho("\n\n<reset><gray>DL:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
+  if InstallConsole then InstallConsole:cecho("\n\n<reset><gray>DL:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
   downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
   installing = false
 end
@@ -356,7 +356,7 @@ function installCFGUI()
   if CFGUI_downloaded == true then
     InstallConsole:cecho("Preparing to install...\n\n")
   else
-    InstallConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
+    InstallConsole:cecho("\n\n<reset><gray>INST:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
     downloadCFGUI()
     return
   end
