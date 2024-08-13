@@ -42,11 +42,11 @@ registerAnonymousEventHandler("sysLoadEvent", promptUserInstallPkg)
 
 --Create the window for Updates
 function updateBox()
-  updateCon =
-    updateCon or
+  installCon =
+    installCon or
     Adjustable.Container:new(
       {
-        name = "updateCon",
+        name = "installCon",
         x = "25%",
         y = "0%",
         width = "40%",
@@ -63,9 +63,9 @@ function updateBox()
         locked = false,
       }
     )
-  updateCon:show()
+  installCon:show()
   UpdateVBox =
-    Geyser.VBox:new({name = "UpdateVBox", x = 5, y = 5, width = "98%", height = "98%"}, updateCon)
+    Geyser.VBox:new({name = "UpdateVBox", x = 5, y = 5, width = "98%", height = "98%"}, installCon)
   UpdateHBox = Geyser.HBox:new({name = "UpdateHBox"}, UpdateVBox)
   InstallConsole =
     Geyser.MiniConsole:new(
@@ -141,15 +141,10 @@ QLabel{
   CancelLabel:setFontSize(14)
   CancelLabel:setFgColor("White")
   CancelLabel:echo("<center>Remind Me Later")
-  CancelLabel:setClickCallback("closeUpdateCon")
+  CancelLabel:setClickCallback("closeInstallCon")
   OptionsSpacerLabel2 =
     Geyser.Label:new({name = "OptionsSpacerLabel2", h_stretch_factor = 1}, OptionsHBox)
   OptionsSpacerLabel2:setStyleSheet(updateSpacerStyle)
-end
-
-function closeUpdateCon()
-  clearWindow("InstallConsole")
-  updateCon:hide()
 end
 
 --Create the window for new installs
