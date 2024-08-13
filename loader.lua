@@ -357,7 +357,7 @@ function installCFGUI()
     InstallConsole:cecho("Preparing to install...\n\n")
   else
     InstallConsole:cecho("\n\n<reset><gray>INST:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
-    downloadCFGUI()
+    downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
     return
   end
   InstallConsole:cecho("Installing latest version...\n\n")
