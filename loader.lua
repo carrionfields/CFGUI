@@ -13,12 +13,16 @@ background-color: #191919;
 border-width: 0px;
 ]]
 
--- Disable/remove obsolete loader script
+-- Disable/remove obsolete loader scripts
 if exists("CF_Loader", "script") > 0 then
+  disableScript("CF_Loader")
+  uninstallPackage("CF_Loader")
+end
+if exists("CF_loader", "script") > 0 then
   disableScript("CF_loader")
   uninstallPackage("CF_loader")
 end
-if exists("CF-Loader", "script") > 0 then
+if exists("CF-loader", "script") > 0 then
   disableScript("CF-loader")
   uninstallPackage("CF-loader")
 end
@@ -62,17 +66,17 @@ function updateBox()
   UpdateVBox =
     Geyser.VBox:new({name = "UpdateVBox", x = 5, y = 5, width = "98%", height = "98%"}, updateCon)
   UpdateHBox = Geyser.HBox:new({name = "UpdateHBox"}, UpdateVBox)
-  UpdateConsole =
+  InstallConsole =
     Geyser.MiniConsole:new(
-      {name = 'UpdateConsole', v_stretch_factor = 5, autoWrap = true, scrollBar = false}, UpdateVBox
+      {name = 'InstallConsole', v_stretch_factor = 5, autoWrap = true, scrollBar = false}, UpdateVBox
     )
-  UpdateConsole:setFontSize(12)
-  setBackgroundColor("UpdateConsole", 0, 0, 0, 0)
+  InstallConsole:setFontSize(12)
+  setBackgroundColor("InstallConsole", 0, 0, 0, 0)
   if getAvailableFonts()["Cascadia Mono"] then
-    setFont("UpdateConsole", "Cascadia Mono")
+    setFont("InstallConsole", "Cascadia Mono")
   end
-  clearWindow("UpdateConsole")
-  UpdateConsole:cecho(
+  clearWindow("InstallConsole")
+  InstallConsole:cecho(
     "<white><b>A new version of the Carrion Fields client package is available!<reset>\n\nWe recommend updating for new features and bug fixes. <b>If you choose to update, Mudlet will close.</b> Installation will complete when you reopen Mudlet.\n\nYou can reopen this window anytime from the Main Menu."
   )
   OptionsHBox = Geyser.HBox:new({name = "OptionsHBox", v_stretch_factor = 1}, UpdateVBox)
@@ -143,7 +147,7 @@ QLabel{
 end
 
 function closeUpdateCon()
-  clearWindow("UpdateConsole")
+  clearWindow("InstallConsole")
   updateCon:hide()
 end
 
