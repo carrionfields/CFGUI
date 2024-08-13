@@ -1,5 +1,6 @@
 -- Updated 8/13/2024
 local installing = false
+local CFGUI_downloaded = false
 
 updateContainerStyle =
   [[
@@ -78,7 +79,7 @@ function updateBox()
   end
   clearWindow("UpdateConsole")
   UpdateConsole:cecho(
-    "<white><b>A new version of the Carrion Fields client package is ready to install!<reset>\n\nWe recommend updating for new features and bug fixes. <b>If you choose to update, Mudlet will close.</b> Installation will complete when you reopen Mudlet.\n\nYou can reopen this window anytime from the Main Menu."
+    "<white><b>A new version of the Carrion Fields client package is ready to install!<reset>\n\nWe recommend updating for new features and bug fixes. \n\nYou can reopen this window anytime from the Main Menu.\n\n"
   )
   OptionsHBox = Geyser.HBox:new({name = "OptionsHBox", v_stretch_factor = 1}, UpdateVBox)
   OptionsSpacerLabel1 =
@@ -320,33 +321,49 @@ function closeInstallCon()
   installCon:hide()
 end
 
--- Attempt to download latest version of CFGUI, triggeered by click of "Install" or "Update" button
+-- Attempt to download latest version of CFGUI, triggered by click of "Update" or "Install" button
 function downloadCFGUI()
+  if UpdateConsole then UpdateConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
+  if InstallConsole then InstallConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n") end
   downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
-  if exists("CFGUI", "script") > 0 then
-    UpdateConsole:cecho("<gray><b>Download complete!</b>\n\nUninstalling old version...\n")
-    uninstallPackage("CFGUI")
-    saveProfile()
-    tempTimer(3, [[ resetProfile() ]])
-    UpdateConsole:cecho("<gray>Success.\n\n")
-  end
-  tempTimer(5, [[ installWindow() ]])
+  installing = false
 end
 
--- Install, triggered by successful download of CFGUI.zip
+-- Triggered by successful download of CFGUI
+function installCFGUIPrep(_, filename)
+  if not filename:find("CFGUI.zip", 1, true) then return end
+  UpdateConsole:cecho("<white><b>Download complete!</b>")
+  if exists("CFGUI", "script") > 0 then
+    UpdateConsole:cecho("<white><b>Uninstalling old version...\n")
+    uninstallPackage("CFGUI")
+    saveProfile()
+    resetProfile()
+    tempTimer(2, [[ 
+      if exists("CFGUI", "script") == 0 then
+        UpdateConsole:cecho("<gray>Success.\n\n")
+      end	
+    ]])
+  end
+  tempTimer(5, [[ closeUpdateCon() ]])
+  tempTimer(5, [[ installWindow() ]])
+  CFGUI_downloaded = true
+  return
+end
+registerAnonymousEventHandler("sysDownloadDone", installCFGUIPrep)
+
+-- installCFGUI riggered by click of "Install" button
 function installCFGUI()
-  if io.exists(getMudletHomeDir().."/CFGUI.zip") then
+  if CFGUI_downloaded == true then
     InstallConsole:cecho("Preparing to install...\n\n")
   else
-    InstallConsole:cecho("File not found.\n\n")
-    InstallConsole:cecho("\n\n<reset><gray>Downloading latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n")
+    InstallConsole:cecho("\n\n<reset><gray>Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
     downloadCFGUI()
+    return
   end
-  --installing = true
   InstallConsole:cecho("Installing latest version...\n\n")
-  tempTimer(5, [[ installPackage(getMudletHomeDir().."/CFGUI.zip") ]])
+  tempTimer(2, [[ installPackage(getMudletHomeDir().."/CFGUI.zip") ]])
+  installing = true
 end
---registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
 
 -- Notifies user if CFGUI.zip fails to download
 function CFGUIdownloadError(event, errorFound, localFilename, usedUrl)
@@ -354,6 +371,7 @@ function CFGUIdownloadError(event, errorFound, localFilename, usedUrl)
   InstallConsole:cecho(errorFound)
   debugc("function downloadErrorEventHandler," .. errorFound)
   InstallConsole:cecho("\n<b><OrangeRed>Error: File download failed. Check your Internet connection.<reset>\n\n")
+  CFGUI_downloaded = false
 end
 registerAnonymousEventHandler("sysDownloadError", CFGUIdownloadError)
 
@@ -370,7 +388,7 @@ function installComplete(_, package)
     closeInstallCon()
     cecho("<OrangeRed><b>Installation complete!<reset>\n\n")
     cecho(
-      "<grey><b>IMPORTANT:</b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n"
+      "<grey><b><red>IMPORTANT:</b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n"
     )
     update_ready = false
   end
