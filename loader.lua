@@ -337,7 +337,6 @@ function installCFGUIPrep(_, filename)
     UpdateConsole:cecho("<white><b>Uninstalling old version...\n")
     uninstallPackage("CFGUI")
     saveProfile()
-    resetProfile()
     tempTimer(2, [[ 
       if exists("CFGUI", "script") == 0 then
         UpdateConsole:cecho("<gray>Success.\n\n")
@@ -355,6 +354,7 @@ registerAnonymousEventHandler("sysDownloadDone", installCFGUIPrep)
 function installCFGUI()
   if CFGUI_downloaded == true then
     InstallConsole:cecho("Preparing to install...\n\n")
+    resetProfile()
   else
     InstallConsole:cecho("\n\n<reset><gray>INST:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
     downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
