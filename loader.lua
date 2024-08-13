@@ -350,11 +350,10 @@ function installCFGUIPrep(_, filename)
 end
 registerAnonymousEventHandler("sysDownloadDone", installCFGUIPrep)
 
--- installCFGUI riggered by click of "Install" button
+-- installCFGUI triggered by click of "Install" button
 function installCFGUI()
   if CFGUI_downloaded == true then
     InstallConsole:cecho("Preparing to install...\n\n")
-    resetProfile()
   else
     InstallConsole:cecho("\n\n<reset><gray>INST:Attempting to download latest version from https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip\n\n")
     downloadFile(getMudletHomeDir().."/CFGUI.zip", "https://github.com/carrionfields/CFGUI/releases/latest/download/CFGUI.zip")
