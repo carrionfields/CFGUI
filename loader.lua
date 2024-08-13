@@ -1,7 +1,7 @@
 -- Updated 8/13/2024
 local installing = false
 local CFGUI_downloaded = false
-local already_prepped = false
+CFGUI_just_updated = false
 
 updateContainerStyle =
   [[
@@ -399,7 +399,7 @@ function installComplete(_, package)
   cecho("<white><b>Installation complete!<reset>\n\n")
   cecho("<grey><b><red>IMPORTANT:<gray></b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n")
   update_ready = false
-  cf_loader_script = getScript("cfLoader")  
+  CFGUI_just_updated = true
 end
 registerAnonymousEventHandler("sysInstall", installComplete)
 
