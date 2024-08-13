@@ -1,4 +1,5 @@
 -- Updated 8/13/2024
+local installing = false
 
 updateContainerStyle =
   [[
@@ -153,6 +154,7 @@ end
 
 --Create the window for new installs
 function installWindow()
+  if installing == true then return end
   if exists("CFGUI", "script") > 0 then
     return
   else
@@ -337,6 +339,7 @@ function installCFGUI(_, filename)
     InstallConsole:cecho("<gray>Success.\n\n")
   end
   InstallConsole:cecho("Installing new version...\n\n")
+  installing = true
   tempTimer(5, [[ installPackage(getMudletHomeDir().."/CFGUI.zip") ]])
 end
 registerAnonymousEventHandler("sysDownloadDone", installCFGUI)
