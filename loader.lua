@@ -196,7 +196,7 @@ function installWindow()
     clearWindow("InstallConsole")
     InstallConsole:cecho(
       [[
-<white><b>Download the official Carrion Fields interface!<reset>
+<white><b>Install the latest Carrion Fields interface!<reset>
 
 <grey>Enjoy features including:
 <DodgerBlue>-<grey> Easy aliases, variables, and highlights
@@ -208,6 +208,7 @@ function installWindow()
 <DodgerBlue>-<grey> An event calendar that tells you when the next in-game events and bonuses will take place
 
 ...and much more!
+			
 ]]
     )
     InstallOptionsHBox =
