@@ -1,4 +1,4 @@
--- Updated 8/13/2024
+-- Updated 8/14/2024
 local installing = false
 local CFGUI_downloaded = false
 CFGUI_just_updated = false
