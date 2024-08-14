@@ -396,7 +396,7 @@ end
 function installComplete(_, package)
   if package ~= "CFGUI" then return end
   closeInstallCon()
-  cecho("<white><b>Installation complete!<reset>\n\n")
+  cecho("<white><b>Installation complete!<reset>\n\nWe strongly recommend restarting Mudlet to ensure the new features function properly.")
   cecho("<grey><b><red>IMPORTANT:<gray></b> After logging in, you may need to use the <white><b>MUDLETMODE ON</b><grey> and <white><b>SETPROMPT</b><grey> commands to ensure your prompt and client function correctly.\n\nSee <white><b>GUIHELP</b><grey> for more information.\n\n")
   update_ready = false
   CFGUI_just_updated = true
