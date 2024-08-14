@@ -1,17 +1,12 @@
-1.4.3b
-4/3/2024
+1.5
+8/14/2024
 
-* Additional prompt number fix. Thanks to bubthegreat for spotting and quickly fixing it!
+New slimmed down bottom bar, making it nearly unbreakable even for the smallest of screens. Extensive under-the-hood improvements; update/installation process improved.
 
-<white>Prompt Fixes:<reset>
-<OrangeRed>-<reset> Prompts should be fixed for everyone! Shapeshifters, rangers, paladins, goblins, etc. can rejoice. The changes were extensive, so there is always a possibility that a bug will eventually surface.
-
-<white>New Features:<reset>
-<OrangeRed>-<reset> Buttons, gauges, labels and menus in the GUI have changed to a more readable font.
-<OrangeRed>-<reset> More information has been added to the bottom panel, including: Indoor/Outdoor, Character Position (sitting, standing, resting, sleeping, etc.), a slightly prettier moon phase display, and weather.
-
-<white>Outstanding Issues:<reset>
-<OrangeRed>-<reset> Still trying to figure out what broke <direction> add.
-<OrangeRed>-<reset> The item journal behaves strangely with Alduk.
+Also added:
+- Log Theater: You can now drag-and-drop logs into Mudlet, which will replay them in real time! Logs must be .txt files formatted with timestamps.
+- Font Size Adjuster
+- Exits Compass
+- And much more!
 
 Report issues or request features on Discord or email immrahsael@gmail.com
