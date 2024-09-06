@@ -264,7 +264,39 @@ Most aspects of the interface can be resized. Use the <b><white>fontsize</b><gra
 Entering the <white><b>fontsize</b><gray> command will display a list of options.
 
 ]])
-elseif helpselect == '14' then
+  elseif helpselect == '14' then
+    cecho(
+	[[				
+<white><b>Keypad Keys</b><gray>
+
+For those of you with keypads on the right-hand side of your keyboards, we have set up a scheme that should make walking around a bit easier:
+
+<b><white>   7              8              9<reset>
+  Flee          North            Up
+			
+<b><white>   4              5              6<reset>
+  West           Look           East   
+   
+<b><white>   1              2              3<reset>
+  Where          South          Down
+
+Holding shift when you press any of the above directional keys will allow you to scan in the chosen direction. For example, shift + 8 would input <white><b>"scan north"<reset>. Other special keypad keys include:
+
+<b><white>+<reset>: This will input your action and target variables. For example, if your action variable is <white><b>bash<reset> and your target variable is <white><b>Rahsael<reset> then it will input "<white><b>bash Rashael<reset>".
+
+<b><white>.<reset>: This will input <white><b>"scan all"<reset>.
+
+<b><white>0<reset>: This will input <white><b>"who pk"<reset>.
+
+<b>Holding Ctrl and pressing keys will have different inputs, depending on your class.<reset>
+
+For Warriors, Ctrl + direction will input "dash <direction>" and then your action. For example given the target and action variables above, Ctrl + 4 would input "dash west bash Rahsael".
+For Shapeshifters, Ctrl + direction will input "run <direction>".
+For Conjurers, Ctrl + direction will move your familiar in the chosen direction. / or Ctrl + / will release your familiar. Ctrl + + will order your familiar to murder your "target."
+For Rangers, Ctrl + direction will attempt to creep in that direction. / or Ctrl + / will attempt to camouflage.
+
+]])
+elseif helpselect == '15' then
   cecho(
     [[
 <white>Useful Utility Commands<gray>
@@ -322,8 +354,10 @@ For more details, enter the command by itself.
     <dodger_blue>11<reset> - Advanced Aliases & Scripting
     <dodger_blue>12<reset> - Affects and the Affects Monitor
     <dodger_blue>13<reset> - Fontsize
+    <dodger_blue>14<reset> - Keypad Keys
+			
 						
-    <dodger_blue>14<reset> - Useful Utility Commands - <OrangeRed>A Must-Read!
+    <dodger_blue>15<reset> - Useful Utility Commands - <OrangeRed>A Must-Read!
     
     <dodger_blue>0<reset> - Troubleshooting
   
