@@ -1,12 +1,9 @@
-1.5
-8/14/2024
+1.5.1
+3/28/2025
 
-New slimmed down bottom bar, making it nearly unbreakable even for the smallest of screens. Extensive under-the-hood improvements; update/installation process improved.
-
-Also added:
-- Log Theater: You can now drag-and-drop logs into Mudlet, which will replay them in real time! Logs must be .txt files formatted with timestamps.
-- Font Size Adjuster
-- Exits Compass
-- And much more!
+Added:
+- A new Theran Calendar app has been added to the Main Menu!
+- Add and remove note entries to characters's info cards. Use the info command in the Mudlet skin to check it out!
+- Other assorted bug fixes and improvements
 
 Report issues or request features on Discord or email immrahsael@gmail.com
